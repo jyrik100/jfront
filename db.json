@@ -1,0 +1,26 @@
+{
+    "journeys1" : [  
+      {    
+        "id": 1,    
+        "departure": "2021-05-31T23:57:25",    
+        "return": "2021-06-01T00:05:46",    
+        "departureStation_ID": "094",    
+        "departureStation_Name": "Laajalahden aukio",    
+        "returnStation_ID": "100",    
+        "returnStation_Name": "Teljäntie",    
+        "coveredDistance_Meters": 2043,    
+        "duration_Seconds": 500    
+      },
+      {    
+        "id": 2,    
+        "departure": "2021-05-31T23:57:25",    
+        "return": "2021-06-01T00:05:46",    
+        "departureStation_ID": "094",    
+        "departureStation_Name": "Laajalahden aukio",    
+        "returnStation_ID": "100",    
+        "returnStation_Name": "Teljäntie",    
+        "coveredDistance_Meters": 20243,    
+        "duration_Seconds": 520    
+      }  
+    ]
+}
