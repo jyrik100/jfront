@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import Journey from "./components/Journey"
-import axios from 'axios'
+import journeyService from './services/Journeys'
 
 const App = () => {
   const [journeys, setJourneys] = useState([])
@@ -8,8 +8,8 @@ const App = () => {
 
   useEffect(() => {    
     console.log('effect')    
-    axios      
-    .get('http://localhost:3001/api/journeys')      
+    journeyService
+    .getAllJourneys()    // .get('http://localhost:3001/api/journeys')      
     .then(response => {        
       console.log('promise fulfilled')        
       setJourneys(response.data)      
