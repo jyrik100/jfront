@@ -1,54 +1,46 @@
-import { useState, useEffect } from "react"
-import Journey from "./components/Journey"
-import journeyService from './services/Journeys'
+import Stations from "./components/Stations"
+import Station from "./components/Station"
+
+import {
+  BrowserRouter as Router,
+  Routes, Route, Link
+} from "react-router-dom"
+import Journeys from "./components/Journeys"
+
+const stations = [
+  {
+    id: 1,
+    name: "TampereRail",
+    city: "Tampere"
+
+  }
+  ,
+  {
+    id: 2,
+    name: "HelsinkiRail",
+    city: "Helsinki"
+  }
+] 
+
+
+
 
 const App = () => {
-  const [journeys, setJourneys] = useState([])
-  const [newJourney, setNewJourney] = useState('') 
-
-  useEffect(() => {    
-    console.log('effect')    
-    journeyService
-    .getAllJourneys()    // .get('http://localhost:3001/api/journeys')      
-    .then(response => {        
-      console.log('promise fulfilled')        
-      setJourneys(response.data)      
-    })  
-  }, [])  
-  console.log('render', journeys.length, 'journeys')
-
-  const addJourney = (event) => {    
-    event.preventDefault()
-    const journeyObject = {
-      departure: newJourney,
-      id: journeys.length + 1,
-    }
-  
-    setJourneys(journeys.concat(journeyObject))
-    setNewJourney('')
-  }
-
-  const handleJourneyChange = (event) => {    
-    setNewJourney(event.target.value)  
-  }
-
+  const padding = {padding: 5}
   return (
+  <Router>
     <div>
-      <h1>add new</h1>
-      <form onSubmit={addJourney}>        
-        <input         
-          value={newJourney}
-          onChange={handleJourneyChange}
-        />
-        <button type="submit">save</button>      
-      </form> 
-      <h1>journeys</h1>
-      <ul>        
-        {journeys.map(journey => 
-          <Journey key={journey.id} journey={journey}></Journey>
-        )}      
-      </ul>
+      <Link style={padding} to="/journeys">JourneysList</Link>
+      <Link style={padding} to="/stations">StationsList</Link>
+
     </div>
+    <Routes>    
+      <Route path="/stations/:id" element={<Station stations={stations} />} />
+      <Route path="/journeys" element={<Journeys />} />
+      <Route path="/stations" element={<Stations stations={stations} />} />
+    </Routes>
+  </Router>
+    
   )
 }
 
