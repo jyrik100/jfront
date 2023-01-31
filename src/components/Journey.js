@@ -24,3 +24,5 @@ const Journey = ({ journey }) => {
     )
   }
 export default Journey  
+
+

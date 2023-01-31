@@ -1,31 +1,22 @@
-//import Journey from "./Journey"
+import Journey from "./Journey"
 import { useState, useEffect } from "react"
 import journeyService from "../services/Journeys"
-import {Card,Table,TableHead,TableBody,TableRow,TableCell,TablePagination, Pagination} from '@mui/material';
+import {Card,Table,TableHead,TableBody,TableRow,TableCell,TablePagination} from '@mui/material';
 
 const Journeys = () => {  
-  const [journeys, setJourneys] = useState([])
-  const [newJourney, setNewJourney] = useState('');
-  const [page, setPage] = useState(1);
-  const [size, setPageSize] = useState(10);
-  
-  const handlePage = (page) => setPage(page);
-  const handlePageSizeChange = (event) => {
-    setPageSize(event.target.value);
-  }
-  const totalPages = 30  // this value should be dynamic
-//  const pageContent = journeys.slice((page - 1) * size, page * size)
 
-  useEffect(() => { 
+  const [journeys, setJourneys] = useState([])
+  const [newJourney, setNewJourney] = useState('') 
+
+  useEffect(() => {    
     console.log('effect')    
     journeyService
-//    .getAllJourneys()
-    .getpageJourneys(page, size)          
+    .getAllJourneys()          
     .then(response => {        
       console.log('promise fulfilled')        
       setJourneys(response.data)      
     })  
-  }, [page,size])  
+  }, [])  
   console.log('render', journeys.length, 'journeys')
 
   const addJourney = (event) => {    
@@ -51,17 +42,12 @@ const Journeys = () => {
         <button type="submit">save</button>      
       </form> 
       <Card>
-      <select name="page-size" id="page-size" onChange={handlePageSizeChange}>
-        <option value={10}>10</option>
-        <option value={15}>15</option>
-      </select>
-      <Pagination
-        color="primary"
-        count={totalPages}
-        onChange={(event, value) => handlePage(value)}
-        page={page}
-        size="large"
-      ></Pagination>
+      <TablePagination     
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={journeys.length}
+        rowsPerPage={5}
+        page={2}/>
        <Table>
          <TableHead>
            <TableRow>

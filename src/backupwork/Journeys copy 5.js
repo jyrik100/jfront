@@ -1,20 +1,17 @@
-//import Journey from "./Journey"
+import Journey from "./Journey"
 import { useState, useEffect } from "react"
 import journeyService from "../services/Journeys"
-import {Card,Table,TableHead,TableBody,TableRow,TableCell,TablePagination, Pagination} from '@mui/material';
+import {Card,Table,TableHead,TableBody,TableRow,TableCell,TablePagination} from '@mui/material';
 
 const Journeys = () => {  
+
   const [journeys, setJourneys] = useState([])
   const [newJourney, setNewJourney] = useState('');
-  const [page, setPage] = useState(1);
-  const [size, setPageSize] = useState(10);
-  
-  const handlePage = (page) => setPage(page);
-  const handlePageSizeChange = (event) => {
-    setPageSize(event.target.value);
-  }
-  const totalPages = 30  // this value should be dynamic
-//  const pageContent = journeys.slice((page - 1) * size, page * size)
+  const [page, setPage] = useState(2);
+  const [size, setSize] = useState(3);
+//  const [journeysCount, setJourneyCount] = useState(0);
+//  const [controller, setController] = useState({page: 1,rowsPerPage: 10});
+
 
   useEffect(() => { 
     console.log('effect')    
@@ -25,7 +22,7 @@ const Journeys = () => {
       console.log('promise fulfilled')        
       setJourneys(response.data)      
     })  
-  }, [page,size])  
+  }, [setPage])  
   console.log('render', journeys.length, 'journeys')
 
   const addJourney = (event) => {    
@@ -51,17 +48,12 @@ const Journeys = () => {
         <button type="submit">save</button>      
       </form> 
       <Card>
-      <select name="page-size" id="page-size" onChange={handlePageSizeChange}>
-        <option value={10}>10</option>
-        <option value={15}>15</option>
-      </select>
-      <Pagination
-        color="primary"
-        count={totalPages}
-        onChange={(event, value) => handlePage(value)}
-        page={page}
-        size="large"
-      ></Pagination>
+      <TablePagination     
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={size}
+        rowsPerPage={size}
+        page={size}/>
        <Table>
          <TableHead>
            <TableRow>
