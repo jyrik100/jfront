@@ -10,9 +10,7 @@ const Journeys = () => {
   const [size, setPageSize] = useState(10);
   
   const handlePage = (page) => setPage(page);
-  const handlePageSizeChange = (event) => {
-    setPageSize(event.target.value);
-  }
+  const handlePageSizeChange = (event) => {setPageSize(event.target.value);}
   const totalPages = 30000 // Todo: this value should be dynamic
 //  const pageContent = journeys.slice((page - 1) * size, page * size)
 
@@ -39,6 +37,10 @@ const Journeys = () => {
   }
   const handleJourneyChange = (event) => {    
     setNewJourney(event.target.value)  
+  }
+
+  const decimals = (value) => {    // fix long doubles to show 2 decimals
+    return parseFloat(value.toFixed(2));
   }
     return (    
     <div>
@@ -82,8 +84,8 @@ const Journeys = () => {
                <TableCell>{journey.Departure}</TableCell>
                <TableCell>{journey.Return_station_name}</TableCell>
                <TableCell>{journey.Return}</TableCell>
-               <TableCell >{journey.Covered_distance_m/1000} km</TableCell>
-               <TableCell>{journey.Duration_sec/60} min</TableCell>
+               <TableCell >{decimals(journey.Covered_distance_m/1000)} km</TableCell>
+               <TableCell>{decimals(journey.Duration_sec/60)} min</TableCell>
              </TableRow>
            ))}
          </TableBody>
