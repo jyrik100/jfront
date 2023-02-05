@@ -1,3 +1,4 @@
+// at the moment this is not in use
 const Journey = ({ journey }) => {  
     return (    
     <li>

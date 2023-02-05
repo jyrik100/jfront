@@ -4,6 +4,7 @@ import journeyService from "../services/Journeys"
 import {Card,Table,TableHead,TableBody,TableRow,TableCell,TablePagination, Pagination} from '@mui/material';
 
 const Journeys = () => {  
+
   const [journeys, setJourneys] = useState([])
   const [newJourney, setNewJourney] = useState('');
   const [page, setPage] = useState(1);
@@ -12,12 +13,10 @@ const Journeys = () => {
   const handlePage = (page) => setPage(page);
   const handlePageSizeChange = (event) => {setPageSize(event.target.value);}
   const totalPages = 30000 // Todo: this value should be dynamic
-//  const pageContent = journeys.slice((page - 1) * size, page * size)
 
   useEffect(() => { 
     console.log('effect')    
     journeyService
-//    .getAllJourneys()
     .getpageJourneys(page, size)          
     .then(response => {        
       console.log('promise fulfilled')        
@@ -38,13 +37,12 @@ const Journeys = () => {
   const handleJourneyChange = (event) => {    
     setNewJourney(event.target.value)  
   }
-
   const decimals = (value) => {    // fix long doubles to show 2 decimals
     return parseFloat(value.toFixed(2));
   }
     return (    
-    <div>
-      <h1>add new</h1>
+  <div>
+      <h1>Add New Journey </h1>
       <form onSubmit={addJourney}>        
         <input         
           value={newJourney}
@@ -53,10 +51,10 @@ const Journeys = () => {
         <button type="submit">save</button>      
       </form> 
       <Card>
-      <select name="page-size" id="page-size" onChange={handlePageSizeChange}>
-        <option value={10}>10</option>
-        <option value={15}>15</option>
-      </select>
+        <select name="page-size" id="page-size" onChange={handlePageSizeChange}>
+          <option value={10}>10</option>
+          <option value={15}>15</option>
+        </select>
       <Pagination
         color="primary"
         count={totalPages}
@@ -87,7 +85,7 @@ const Journeys = () => {
                <TableCell >{decimals(journey.Covered_distance_m/1000)} km</TableCell>
                <TableCell>{decimals(journey.Duration_sec/60)} min</TableCell>
              </TableRow>
-           ))}
+            ))}
          </TableBody>
         </Table>
       </Card>    
