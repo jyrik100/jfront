@@ -1,7 +1,6 @@
-# FRONT run jfront with npm start
-# jason-server in Port 3001 use run json server with npm run server
-# BACKEND or have separate back end as Journey - run with npm start
-
+-  run jfront with npm start
+-  jason-server in Port 3001 use run json server with npm run server
+- BACKEND or have separate back end as Journey - run with npm start
 
 This full stack follows requirements based on: https://github.com/solita/dev-academy-2023-exercise
 
