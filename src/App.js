@@ -30,7 +30,7 @@ import { padding } from "@mui/system"
     FID:2,
     ID: 122,
     Nimi: "Saari",
-    Namn: "Hanaholmen",
+    Namn: "Hanaholmens",
     Name: "Saari",
     Osoite: "Hanasaarenranta 1",
     Address: "Hanaholmsstranden 1",
