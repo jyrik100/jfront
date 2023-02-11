@@ -50,6 +50,7 @@ const Journeys = () => {
         />
         <button type="submit">save</button>      
       </form> 
+      <h1>Current Journeys </h1>
       <Card>
         <select name="page-size" id="page-size" onChange={handlePageSizeChange}>
           <option value={10}>10</option>

@@ -7,7 +7,8 @@ BrowserRouter as Router,
 import Journeys from "./components/Journeys"
 import stationService from "./services/Stations"
 import { useState, useEffect } from "react"
-
+import './index.css'
+import { padding } from "@mui/system"
 /* const stations = [
   {
     FID:1,
@@ -55,7 +56,12 @@ const App = () => {
   })  
   }, [])  
 
-  const padding = {padding: 5}
+  const padding = {
+    color: 'black',
+    fontStyle: 'arial',
+    fontSize: 24,
+    padding: 10
+  }
   return (
     <Router>
     <div>
