@@ -2,8 +2,6 @@ import {Card,Table,TableHead,TableBody,TableRow,TableCell,TablePagination, Pagin
 import { useState, useEffect } from "react"
 import {BrowserRouter as Router,Routes, Route, Link} from "react-router-dom"
 import stationService from "../services/Stations"
-import { styled } from '@mui/material/styles';
-import { tableCellClasses } from '@mui/material/TableCell';
 
 
 const Stations = () => {  
@@ -20,28 +18,8 @@ const Stations = () => {
     .then(response => {        
       setStations(response.data)      
     })  
-  }, [page,size]) 
-
-  const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
-    },
-    [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
-    },
-  })); 
-  const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
-  }));
-
-
+  }, [page,size])  
+  
    return (    
     <div>
       <h2>Stations</h2>
@@ -60,16 +38,16 @@ const Stations = () => {
        <Table>
          <TableHead>
            <TableRow>
-             <StyledTableCell>ID</StyledTableCell>
-             <StyledTableCell>Station name</StyledTableCell>
+             <TableCell>ID</TableCell>
+             <TableCell>Station Name</TableCell>
            </TableRow>
          </TableHead>
          <TableBody>
            {stations.map((station) => (
-             <StyledTableRow key={station.ID}>
+             <TableRow key={station.ID}>
                <TableCell>{station.ID}</TableCell>
                <TableCell><Link to={`/stations/${station.FID}`}>{station.Name}</Link></TableCell>
-             </StyledTableRow>
+             </TableRow>
             ))}
          </TableBody>
         </Table>
