@@ -2,29 +2,6 @@
 import { useState, useEffect } from "react"
 import journeyService from "../services/Journeys"
 import {Card,Table,TableHead,TableBody,TableRow,TableCell,TablePagination, Pagination} from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { tableCellClasses } from '@mui/material/TableCell';
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
-}));
-
 
 const Journeys = () => {  
 
@@ -89,26 +66,26 @@ const Journeys = () => {
        <Table>
          <TableHead>
            <TableRow>
-             <StyledTableCell>Id</StyledTableCell>
-             <StyledTableCell>From Station</StyledTableCell>
-             <StyledTableCell>Departure Time</StyledTableCell>
-             <StyledTableCell>Return Station</StyledTableCell>
-             <StyledTableCell>Return Time</StyledTableCell>
-             <StyledTableCell>Distance</StyledTableCell>
-             <StyledTableCell>Durance</StyledTableCell>
+             <TableCell>Id</TableCell>
+             <TableCell>From Station</TableCell>
+             <TableCell>Departure Time</TableCell>
+             <TableCell>Return Station</TableCell>
+             <TableCell>Return Time</TableCell>
+             <TableCell>Distance</TableCell>
+             <TableCell>Durance</TableCell>
            </TableRow>
          </TableHead>
          <TableBody>
            {journeys.map((journey) => (
-             <StyledTableRow key={journey.id}>
-               <StyledTableCell >{journey.id}</StyledTableCell>
-               <StyledTableCell >{journey.Departure_station_name}</StyledTableCell>
-               <StyledTableCell >{journey.Departure}</StyledTableCell>
-               <StyledTableCell >{journey.Return_station_name}</StyledTableCell>
-               <StyledTableCell >{journey.Return}</StyledTableCell>
-               <StyledTableCell  >{decimals(journey.Covered_distance_m/1000)} km</StyledTableCell>
-               <StyledTableCell >{decimals(journey.Duration_sec/60)} min</StyledTableCell>
-             </StyledTableRow>
+             <TableRow key={journey.id}>
+               <TableCell>{journey.id}</TableCell>
+               <TableCell>{journey.Departure_station_name}</TableCell>
+               <TableCell>{journey.Departure}</TableCell>
+               <TableCell>{journey.Return_station_name}</TableCell>
+               <TableCell>{journey.Return}</TableCell>
+               <TableCell >{decimals(journey.Covered_distance_m/1000)} km</TableCell>
+               <TableCell>{decimals(journey.Duration_sec/60)} min</TableCell>
+             </TableRow>
             ))}
          </TableBody>
         </Table>
