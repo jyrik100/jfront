@@ -32,21 +32,31 @@ const Journeys = () => {
   const [newJourney, setNewJourney] = useState('');
   const [page, setPage] = useState(1);
   const [size, setPageSize] = useState(10);
+  const [pageCount, setPageCount] = useState(10);
   
   const handlePage = (page) => setPage(page);
   const handlePageSizeChange = (event) => {setPageSize(event.target.value);}
-  const totalPages = 30000 // Todo: this value should be dynamic
+//  const totalPages = 30000 // Todo: this value should be dynamic
 
   useEffect(() => { 
     console.log('effect')    
     journeyService
-    .getpageJourneys(page, size)          
+    .getpageJourneys(page, size)
     .then(response => {        
       console.log('promise fulfilled')        
       setJourneys(response.data)      
     })  
   }, [page,size])  
   console.log('render', journeys.length, 'journeys')
+
+  useEffect(() => { 
+    console.log('effect')    
+    journeyService
+    .getJourneyspagescount(size)
+    .then(response => {        
+      setPageCount(response.data)        
+    })  
+  }, [page,size])  
 
   const addJourney = (event) => {    
     event.preventDefault()
@@ -81,7 +91,7 @@ const Journeys = () => {
         </select>
       <Pagination
         color="primary"
-        count={totalPages}
+        count={pageCount}
         onChange={(event, value) => handlePage(value)}
         page={page}
         size="large"
