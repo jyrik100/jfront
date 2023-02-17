@@ -10,10 +10,12 @@ const Stations = () => {
   const [stations, setStations] = useState([])
   const [page, setPage] = useState(1);
   const [size, setPageSize] = useState(10);
+  const [pageCount, setPageCount] = useState(10);
+  
 
   const handlePage = (page) => setPage(page);
   const handlePageSizeChange = (event) => {setPageSize(event.target.value);}
-  const totalPages = 30000 // Todo: this value should be dynamic
+  //const totalPages = 30000 // Todo: this value should be dynamic
   useEffect(() => { 
     stationService
     .getpageStations(page, size)          
@@ -21,6 +23,15 @@ const Stations = () => {
       setStations(response.data)      
     })  
   }, [page,size]) 
+  useEffect(() => { 
+    console.log('effect')    
+    stationService
+    .getpageStationspages(size)
+    .then(response => {        
+      setPageCount(response.data)        
+    })  
+  }, [page,size])  
+
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -52,7 +63,7 @@ const Stations = () => {
         </select>
       <Pagination
         color="primary"
-        count={totalPages}
+        count={pageCount}
         onChange={(event, value) => handlePage(value)}
         page={page}
         size="large"
