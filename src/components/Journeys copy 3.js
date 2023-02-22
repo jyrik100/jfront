@@ -30,7 +30,6 @@ const Journeys = () => {
 
   const [journeys, setJourneys] = useState([])
   const [newJourney, setNewJourney] = useState('');
-  const [newValue, setNewValue] = useState('');
   const [page, setPage] = useState(1);
   const [size, setPageSize] = useState(10);
   const [pageCount, setPageCount] = useState(10);
@@ -47,7 +46,7 @@ const Journeys = () => {
       console.log('promise fulfilled')        
       setJourneys(response.data)      
     })  
-  }, [page,size, newValue])  
+  }, [page,size])  
   console.log('render', journeys.length, 'journeys')
 
   useEffect(() => { 
@@ -57,9 +56,7 @@ const Journeys = () => {
     .then(response => {        
       setPageCount(response.data)        
     })  
-    setNewValue('')
-
-  }, [page,size,newValue])  
+  }, [page,size])  
 
   const addJourney = (event) => {    
     event.preventDefault()
@@ -80,7 +77,6 @@ const Journeys = () => {
     .createJourney(journeyObject)      
     .then(response => {        
  //     setJourneys(journeys.concat(journeyObject))
-      setNewValue(1)
       setNewJourney('')
     })
   }

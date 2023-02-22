@@ -7,7 +7,11 @@ const baseUrl4 = 'http://localhost:3001/api/pagejourneyspages'
 const getAllJourneys = () => {
   return axios.get(baseUrl1)
 }
-
+const createJourney = async newObject => {
+  const request = axios.post(baseUrl1, newObject)
+  const response = await request
+  return response.data
+}
 const getJourneyspagescount = (psize) => {
   return axios.get(`${baseUrl4}/${psize}`)
 }
@@ -22,7 +26,7 @@ const getJourneysCount = (stationID) => {
 }
 
 const exportedObject = {
-    getAllJourneys, getpageJourneys, getJourneysCount, getJourneyspagescount
+    getAllJourneys, getpageJourneys, getJourneysCount, getJourneyspagescount,createJourney
 };
 
 export default exportedObject;

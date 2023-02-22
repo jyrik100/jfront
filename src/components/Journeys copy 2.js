@@ -30,7 +30,6 @@ const Journeys = () => {
 
   const [journeys, setJourneys] = useState([])
   const [newJourney, setNewJourney] = useState('');
-  const [newValue, setNewValue] = useState('');
   const [page, setPage] = useState(1);
   const [size, setPageSize] = useState(10);
   const [pageCount, setPageCount] = useState(10);
@@ -47,7 +46,7 @@ const Journeys = () => {
       console.log('promise fulfilled')        
       setJourneys(response.data)      
     })  
-  }, [page,size, newValue])  
+  }, [page,size])  
   console.log('render', journeys.length, 'journeys')
 
   useEffect(() => { 
@@ -57,32 +56,16 @@ const Journeys = () => {
     .then(response => {        
       setPageCount(response.data)        
     })  
-    setNewValue('')
-
-  }, [page,size,newValue])  
+  }, [page,size])  
 
   const addJourney = (event) => {    
     event.preventDefault()
     const journeyObject = {
+      departure: newJourney,
       id: journeys.length + 1,
-      departure: "2021-06-01T00:05:46",
-      return: "2021-06-01T00:05:46",    
-      departureStation_ID: "094",    
-      departureStation_Name: "Laajalahden Aukio",    
-      returnStation_ID: "100",    
-      returnStation_Name: "Teljäntie",    
-      coveredDistance_Meters: "20243",    
-      duration_Seconds: "520"
- 
     }
-    
-    journeyService      
-    .createJourney(journeyObject)      
-    .then(response => {        
- //     setJourneys(journeys.concat(journeyObject))
-      setNewValue(1)
-      setNewJourney('')
-    })
+    setJourneys(journeys.concat(journeyObject))
+    setNewJourney('')
   }
   const handleJourneyChange = (event) => {    
     setNewJourney(event.target.value)  
