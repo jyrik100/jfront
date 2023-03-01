@@ -27,19 +27,10 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 const Journeys = () => {  
-  const [inputs, setInputs] = useState({
-    departure: "<dateTime>",
-    departureStation_ID: "<stationNumber>",
-    departureStation_Name: "<stationName>",
-    return: "<dateTime>",
-    returnStation_Name: "<stationName>",
-    returnStation_ID: "<stationNumber>",
-    distance: "<journey in meters>",
-    duration: "<journey in minutes>"
-  })
 
   const [journeys, setJourneys] = useState([])
   const [newJourney, setNewJourney] = useState('');
+  const [newDeparture, setNewDeparture] = useState('');
   const [newValue, setNewValue] = useState('');
   const [page, setPage] = useState(1);
   const [size, setPageSize] = useState(10);
@@ -47,6 +38,7 @@ const Journeys = () => {
   
   const handlePage = (page) => setPage(page);
   const handlePageSizeChange = (event) => {setPageSize(event.target.value);}
+//  const totalPages = 30000 // Todo: this value should be dynamic
 
   useEffect(() => { 
     console.log('effect')    
@@ -74,52 +66,41 @@ const Journeys = () => {
     event.preventDefault()
     const journeyObject = {
       id: journeys.length + 1,
-      departure: inputs.departure,
-      return: inputs.return,
-      departureStation_ID: inputs.departureStation_ID,
-      departureStation_Name: inputs.departureStation_Name,
-      returnStation_Name: inputs.returnStation_Name,
-      returnStation_ID: inputs.returnStation_ID,
-      coveredDistance_Meters:inputs.distance,
-      duration_Seconds: inputs.duration
-
+      departure: "2021-06-01T00:05:46",
+//      return: "2021-06-01T00:05:46", 
+      return: newDeparture,     
+      departureStation_ID: "094",    
+      departureStation_Name: "Laajalahden Aukio",    
+      returnStation_ID: "100",    
+      returnStation_Name: "Teljäntie",    
+      coveredDistance_Meters: "20243",    
+      duration_Seconds: "520"
+ 
     }
     
     journeyService      
     .createJourney(journeyObject)      
     .then(response => {        
+ //     setJourneys(journeys.concat(journeyObject))
       setNewValue(1)
       setNewJourney('')
     })
   }
-  const changeHandle = e => {
-    setInputs({
-      ...inputs,
-      [e.target.name]: e.target.value
-    })
+/*   const handleJourneyChange = (event) => {    
+    setNewJourney(event.target.value)  
   }
-   const decimals = (value) => {    // fix long doubles to show 2 decimals
+ */  const decimals = (value) => {    // fix long doubles to show 2 decimals
     return parseFloat(value.toFixed(2));
   }
     return (    
   <div>
       <h1>Add New Journey </h1>
       <form onSubmit={addJourney}>
-          enter Departure:           
-          <input type="text" name="departure" value={inputs.departure} onChange={changeHandle}/>                      
-          <input type="text" name="departureStation_ID" value={inputs.departureStation_ID} onChange={changeHandle}/>          
-          <input type="text" name="departureStation_Name" value={inputs.departureStation_Name} onChange={changeHandle}/>          
-          <div>
-          enter Return:            
-          <input type="text" name="return" value={inputs.return} onChange={changeHandle}/>          
-          <input type="text" name="returnStation_ID" value={inputs.returnStation_ID} onChange={changeHandle}/>          
-          <input type="text" name="returnStation_Name" value={inputs.returnStation_Name} onChange={changeHandle}/>          
-          </div>        
-          <div>          
-          Travelled Distance           
-          <input type="text" name="distance" value={inputs.distance} onChange={changeHandle}/>          
-          Travel Durance           
-          <input type="text" name="duration" value={inputs.duration} onChange={changeHandle}/>          
+        <div>          
+          Set Departure time            
+          <input  type="text" value={newDeparture} name="Departure"            
+             onChange={({ target }) => setNewDeparture(target.value)}          
+             />        
         </div>     
         <button type="submit">save</button>      
       </form> 
