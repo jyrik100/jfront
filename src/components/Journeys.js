@@ -157,7 +157,7 @@ const Journeys = () => {
                <StyledTableCell >{journey.Return_station_name}</StyledTableCell>
                <StyledTableCell >{journey.Return}</StyledTableCell>
                <StyledTableCell  >{decimals(journey.Covered_distance_m/1000)} km</StyledTableCell>
-               <StyledTableCell >{decimals(journey.Duration_sec/60)} min</StyledTableCell>
+               <StyledTableCell >{decimals(journey.Duration_sec/60)} hours</StyledTableCell>
              </StyledTableRow>
             ))}
          </TableBody>
